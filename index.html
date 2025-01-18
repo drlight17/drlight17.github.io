@@ -1,2 +1,449 @@
-<title>Home of Ribbons Screensaver</title>
-<div>Hello</div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ribbons Electron</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            /*padding: 20px;*/
+            opacity: 0; /* Начальная скрытая прозрачность */
+            transition: opacity 0.5s ease-in-out; /* Плавная анимация для появления */
+        }
+
+        .light-theme {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .dark-theme {
+            background-color: #333;
+            color: #f4f4f4;
+        }
+        p.copyright {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            top: -50px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: background-color 0.3s;
+            top: -100px;
+            position: relative;
+        }
+
+        .container.dark-theme {
+            background-color: #444;
+        }
+        table{
+            width: 100%;
+        }
+
+        h1, h2 {
+            color: inherit;
+        }
+        body.light-theme h1.title {
+            text-shadow: 0px 0px 6px #ffffff;
+        }
+        h1.title {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+        body.dark-theme a {
+            color: white;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .lang-toggle, .theme-toggle {
+            text-align: right;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 2;
+            position: relative;
+        }
+        .theme-toggle {
+            position: absolute;
+            right:0;
+            top:0;  
+        }
+
+        .lang-toggle button, .theme-toggle button, .download-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            border: none;
+            background: none;
+        }
+
+        .logo {
+            max-width: 100px;
+            margin: 0 auto -20px;
+        }
+
+        .animation {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .theme-toggle button {
+            font-size: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: fixed;
+            top: 0;
+            right: 0;
+        }
+
+        .theme-toggle.dark-theme button {
+            transform: rotate(180deg);
+        }
+        
+        .mailto {
+            display: inline;
+            height: 70px;
+            filter: brightness(.2);
+            position: fixed;
+            right: 0px;
+            bottom: 15px;
+            margin-right: 10px;
+            transition: filter .1s ease, opacity .1s ease, background-color .1s ease, color .1s ease, box-shadow .1s ease, background .1s ease;
+        }
+        .mailto.dark-theme {
+            filter: invert(0);
+        }
+        .mailto:hover {
+            filter: brightness(0);
+        }
+        .mailto.dark-theme:hover {
+            filter: brightness(1);
+        }
+        body.dark-theme .github {
+            filter: brightness(100);
+        }
+    </style>
+    <script>
+        function switchLanguage() {
+            const currentLang = document.querySelector('.lang.en').style.display === 'none' ? 'ru' : 'en';
+            const newLang = currentLang === 'en' ? 'ru' : 'en';
+            document.querySelectorAll('.lang').forEach(el => {
+                el.style.display = el.classList.contains(newLang) ? 'block' : 'none';
+            });
+            const flag = newLang === 'en' ? '🇬🇧' : '🇷🇺';
+            document.getElementById('toggleButton').innerHTML = flag;
+        }
+
+        function setInitialLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const initialLang = userLang.startsWith('ru') ? 'ru' : 'en';
+            document.querySelectorAll('.lang').forEach(el => {
+                el.style.display = el.classList.contains(initialLang) ? 'block' : 'none';
+            });
+            const flag = initialLang === 'en' ? '🇬🇧' : '🇷🇺';
+            document.getElementById('toggleButton').innerHTML = flag;
+        }
+
+        function detectOS() {
+            const platform = navigator.platform.toLowerCase();
+            if (platform.includes('win')) {
+                return 'Windows';
+            } else if (platform.includes('mac')) {
+                return 'macOS';
+            } else if (platform.includes('linux')) {
+                return 'Linux';
+            } else {
+                return 'Unsupported';
+            }
+        }
+
+        function downloadVersion() {
+            const os = detectOS();
+            let downloadLink;
+            if (os === 'Windows') {
+                downloadLink = 'https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver.Setup.0.2.2-alpha.msi';
+            } else if (os === 'macOS') {
+                downloadLink = 'https://github.com/drlight17/ribbons-electron/releases/download/v1.0/macOS_x64.dmg';
+            } else if (os === 'Linux') {
+                downloadLink = 'https://github.com/drlight17/ribbons-electron/releases/download/v1.0/Linux_x64.deb';
+            } else {
+                alert('Your operating system is not supported.');
+                return;
+            }
+            window.location.href = downloadLink;
+        }
+        function toggleTheme() {
+            const currentTheme = document.body.classList.contains('light-theme') ? 'dark' : 'light';
+            if (currentTheme === 'dark') {
+                document.body.classList.remove('light-theme');
+                document.body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+                document.querySelector('.container').classList.remove('light-theme');
+                document.querySelector('.container').classList.add('dark-theme');
+                document.querySelector('.mailto').classList.add('dark-theme');
+                //document.querySelector('.download-button').classList.add('dark-theme');
+                document.querySelector('.theme-toggle button').innerHTML = '☀️'; // Change to sun icon
+            } else {
+                document.body.classList.remove('dark-theme');
+                document.body.classList.add('light-theme');
+                localStorage.setItem('theme', 'light');
+                document.querySelector('.container').classList.add('light-theme');
+                document.querySelector('.container').classList.remove('dark-theme');
+                //document.querySelector('.download-button').classList.remove('dark-theme');
+                document.querySelector('.mailto').classList.remove('dark-theme');
+                document.querySelector('.theme-toggle button').innerHTML = '🌙'; // Change to moon icon
+            }
+        }
+
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            if (savedTheme === 'dark' || (savedTheme === null && prefersDarkScheme)) {
+                document.body.classList.add('dark-theme');
+                document.querySelector('.container').classList.add('dark-theme');
+                document.querySelector('.mailto').classList.add('dark-theme');
+                //document.querySelector('.download-button').classList.add('dark-theme');
+                document.querySelector('.theme-toggle button').innerHTML = '☀️'; // Sun for dark theme
+            } else {
+                document.body.classList.add('light-theme');
+                document.querySelector('.container').classList.add('light-theme');
+                document.querySelector('.theme-toggle button').innerHTML = '🌙'; // Moon for light theme
+            }
+            document.body.style.opacity = 1; // Показываем страницу с плавной анимацией
+        }
+
+        window.onload = function() {
+            setInitialTheme();
+            setInitialLanguage();
+        }
+    </script>
+</head>
+<body onload="setInitialTheme(); setInitialLanguage()">
+    <h1 class="title"><img src="https://raw.githubusercontent.com/drlight17/ribbons-electron/master/icon.png" alt="Ribbons Electron Logo" class="logo"><span>Ribbons Screensaver</span></h1>
+    <div class="container">
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">🌙</button>
+        </div>
+        <div class="lang-toggle">
+            <a href="https://github.com/drlight17/ribbons-electron" target="_blank">
+                <button class="github" title="github" style="padding: 10px; background-color: transparent; border: none; cursor: pointer; display: inline-flex; align-items: center;">
+                    <img src="./Octicons-mark-github.svg" alt="GitHub" style="width: 30px; height: 30px;"/>
+                </button>
+
+            </a>
+            <button id="toggleButton" onclick="switchLanguage()">Switch to Russian</button>
+        </div>
+        <div class="lang en">
+            <p>Famous Windows "Ribbons" inspired screensaver made with JavaScript and Electron, supporting multiple platforms.</p>
+            <h2>Demo</h2>
+            <img align="center" width="100%" src="https://raw.githubusercontent.com/drlight17/ribbons-electron/master/ribbons-example.gif">
+            <h2>Download</h2>
+            <!--<button class="download-button" onclick="downloadVersion()">Download automatically</button>-->
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Type</th>
+                        <th>Download link</th>
+                        <th>File size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🖥 Windows x64</td>
+                        <td>.msi</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver.Setup.0.2.2-alpha.msi">Download</a></td>
+                        <td>96.7 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Debian/Ubuntu Linux x64</td>
+                        <td>.deb</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron_0.2.2-alpha_amd64.deb">Download</a></td>
+                        <td>77.2 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 RHEL/Fedora Linux x64</td>
+                        <td>.rpm</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron-0.2.2-alpha.x86_64.rpm">Download</a></td>
+                        <td>77.7 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Linux AppImage x64</td>
+                        <td>.AppImage</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha.AppImage">Download</a></td>
+                        <td>107 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Linux FlatPak x64</td>
+                        <td>.flatpak</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-x86_64.flatpak">Download</a></td>
+                        <td>78.8 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 Linux Archive x64</td>
+                        <td>.tar.gz</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron-0.2.2-alpha.tar.gz">Download</a></td>
+                        <td>102 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 Windows Archive x64</td>
+                        <td>.zip</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-win.zip">Download</a></td>
+                        <td>114 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🍎 macOS DMG x64</td>
+                        <td>.dmg</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha.dmg">Download</a></td>
+                        <td>103 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🍎 macOS DMG arm64</td>
+                        <td>.dmg</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-arm64.dmg">Download</a></td>
+                        <td>99 MB</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Usage</h2>
+            <p>Ribbons Electron runs as a screensaver with idle system detection for fullscreen animation. Disable native screensavers to prevent conflicts.</p>
+            <h2>License</h2>
+            <p>This project is licensed under the AGPL-3.0 License. See the <a href="https://github.com/drlight17/ribbons-electron/blob/main/LICENSE">LICENSE</a> file for details.</p>
+            <h2>Special thanks to:</h2>
+            <ul>
+                <li>
+                    <a href="https://github.com/madve2">madve2</a> for his 
+                    <a href="https://github.com/madve2/electron-screensaver-seed">electron-screensaver-seed repo</a> 
+                    that was partly used to create initial Electron app
+                </li>
+                <li>
+                    <a href="https://github.com/fadyehabamer">fadyehabamer</a> for his 
+                    <a href="https://github.com/fadyehabamer/Ribbons-Screensaver">Ribbons-Screensaver repo</a> 
+                    that is the basis for graphics (he "failed with PWA", I made it with Electron =)))
+                </li>
+            </ul>
+
+            <p>All rights belongs to their authors!</p>
+
+        </div>
+        <div class="lang ru">
+            <p>Мультиплатформенный скринсейвер, вдохновленный знаменитым Windows скринсейвером "Ленты", сделанный с использованием JavaScript и Electron.</p>
+            <h2>Демонстрация</h2>
+            <img align="center" width="100%" src="https://raw.githubusercontent.com/drlight17/ribbons-electron/master/ribbons-example.gif">
+            <h2>Загрузка</h2>
+            <!--<button class="download-button" onclick="downloadVersion()">Скачать автоматически</button>-->
+            <table border="1" cellpadding="10" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Платформа</th>
+                        <th>Тип</th>
+                        <th>Ссылка</th>
+                        <th>Размер</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🖥 Windows x64</td>
+                        <td>.msi</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver.Setup.0.2.2-alpha.msi">Скачать</a></td>
+                        <td>96.7 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Debian/Ubuntu Linux x64</td>
+                        <td>.deb</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron_0.2.2-alpha_amd64.deb">Скачать</a></td>
+                        <td>77.2 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 RHEL/Fedora Linux x64</td>
+                        <td>.rpm</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron-0.2.2-alpha.x86_64.rpm">Скачать</a></td>
+                        <td>77.7 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Linux AppImage x64</td>
+                        <td>.AppImage</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha.AppImage">Скачать</a></td>
+                        <td>107 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🐧 Linux FlatPak x64</td>
+                        <td>.flatpak</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-x86_64.flatpak">Скачать</a></td>
+                        <td>78.8 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 Linux Archive x64</td>
+                        <td>.tar.gz</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/ribbons-electron-0.2.2-alpha.tar.gz">Скачать</a></td>
+                        <td>102 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🌐 Windows Archive x64</td>
+                        <td>.zip</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-win.zip">Скачать</a></td>
+                        <td>114 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🍎 macOS DMG x64</td>
+                        <td>.dmg</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha.dmg">Скачать</a></td>
+                        <td>103 MB</td>
+                    </tr>
+                    <tr>
+                        <td>🍎 macOS DMG arm64</td>
+                        <td>.dmg</td>
+                        <td><a href="https://github.com/drlight17/ribbons-electron/releases/latest/download/Ribbons.screensaver-0.2.2-alpha-arm64.dmg">Скачать</a></td>
+                        <td>99 MB</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Использование</h2>
+            <p>Ribbons Electron работает как скринсейвер с обнаружением бездействия системы для полноэкранной анимации. Отключите встроенные скринсейверы, чтобы избежать конфликтов.</p>
+            <h2>Лицензия</h2>
+            <p>Этот проект лицензирован по лицензии AGPL-3.0. Подробнее см. в файле <a href="https://github.com/drlight17/ribbons-electron/blob/main/LICENSE">LICENSE</a>.</p>
+            <h2>Благодарности:</h2>
+            <ul>
+                <li>
+                    <a href="https://github.com/madve2">madve2</a> за его
+                    <a href="https://github.com/madve2/electron-screensaver-seed">репоозиторий electron-screensaver-seed</a>, который был частично использован для создания каркаса приложения Electron
+                </li>
+                <li>
+                    <a href="https://github.com/fadyehabamer">fadyehabamer</a> за его 
+                    <a href="https://github.com/fadyehabamer/Ribbons-Screensaver">репозиторий Ribbons-Screensaver</a> 
+                    , который стал основой для графики (у него "не получилось с PWA", я сделал с  Electron =)))
+                </li>
+            </ul>
+
+            <p>Все права принадлежат их авторам!</p>
+        </div>
+    </div>
+    <p class="copyright"><a href="https://github.com/drlight17">drlight17</a> &nbsp;&nbsp;©2025 </p>
+    <a href="mailto:drlight_here@inbox.ru"><img class="mailto" src="developed_by_drlight.png" /></a>
+</body>
+</html>
+
