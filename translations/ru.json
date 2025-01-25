@@ -1,0 +1,23 @@
+{
+	"title": "Мультиплатформенный скринсейвер, вдохновленный знаменитым Windows скринсейвером \"Ленты\", сделанный с использованием JavaScript и Electron.",
+	"icon_span":"Скринсейвер \"Ленты\"",
+	"toggleButton":"Переключить язык",
+	"showDemo_btn":"Показать демо анимации с настройками по-умолчанию",
+	"fullscreen_btn":"На весь экран",
+	"hideDemo_btn":"Закрыть",
+	"sys_req":"Минимальные системные требования",
+	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux с современной версией ядра (5.x) и Xserver (wayland не поддерживается)",
+	"download":"Загрузка",
+	"platform_th":"Платформа",
+	"type_th":"Тип",
+	"download_th":"Ссылка",
+	"filesize_th":"Размер",
+	"usage_h2":"Использование",
+	"usage_p":"Ribbons Electron работает как скринсейвер с обнаружением бездействия системы для полноэкранной анимации. Отключите встроенные скринсейверы, чтобы избежать конфликтов.",
+	"license_h2":"Лицензия",
+	"license_p":"Этот проект лицензирован по лицензии AGPL-3.0. Подробнее см. в файле <a href=\"https://github.com/drlight17/ribbons-electron/blob/main/LICENSE\">LICENSE</a>.",
+	"spec_h2":"Благодарности:",
+	"spec_li1":"<a href=\"https://github.com/madve2\">madve2</a> за его <a href=\"https://github.com/madve2/electron-screensaver-seed\">репозиторий electron-screensaver-seed</a>, который был частично использован для создания каркаса приложения Electron",
+	"spec_li2":"<a href=\"https://github.com/fadyehabamer\">fadyehabamer</a> за его <a href=\"https://github.com/fadyehabamer/Ribbons-Screensaver\">репозиторий Ribbons-Screensaver</a>, который стал основой для графики (у него \"не получилось с PWA\", я сделал с  Electron =)))",
+	"all_rights_p":"Все права принадлежат их авторам!"
+}

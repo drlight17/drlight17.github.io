@@ -1,0 +1,25 @@
+{
+	"title": "Famous Windows \"Ribbons\" inspired screensaver made with JavaScript and Electron, supporting multiple platforms.",
+	"icon_span":"Ribbons Screensaver",
+	"toggleButton":"Switch locale",
+	"showDemo_btn":"Show animation demo with default settings",
+	"fullscreen_btn":"Fullscreen",
+	"hideDemo_btn":"Close",
+	"sys_req":"Minimum system requirements",
+	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux with modern kernel version (5.x) and Xserver (wayland is not supported)",
+	"download":"Download",
+	"platform_th":"Platform",
+	"type_th":"Type",
+	"download_th":"Download link",
+	"filesize_th":"File size",
+	"usage_h2":"Usage",
+	"usage_p":"Ribbons Electron runs as a screensaver with idle system detection for fullscreen animation. Disable native screensavers to prevent conflicts.",
+	"license_h2":"License",
+	"license_p":"This project is licensed under the AGPL-3.0 License. See the <a href=\"https://github.com/drlight17/ribbons-electron/blob/main/LICENSE\">LICENSE</a> file for details.",
+	"spec_h2":"Special thanks to:",
+	"spec_li1":"<a href=\"https://github.com/madve2\">madve2</a> for his <a href=\"https://github.com/madve2/electron-screensaver-seed\">electron-screensaver-seed repo</a> that was partly used to create initial Electron app",
+	"spec_li2":"<a href=\"https://github.com/fadyehabamer\">fadyehabamer</a> for his <a href=\"https://github.com/fadyehabamer/Ribbons-Screensaver\">Ribbons-Screensaver repo</a> that is the basis for graphics (he \"failed with PWA\", I made it with Electron =)))",
+	"all_rights_p":"All rights belongs to their authors!"
+
+
+}
