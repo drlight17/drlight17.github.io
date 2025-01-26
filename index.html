@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             opacity: 0;
+            min-width: 400px;
             transition: opacity 0.5s ease-in-out;
         }
 
@@ -176,6 +177,30 @@
           100% {
             text-shadow: 0 0 23px var(--c);
           }
+        }
+
+        @media (max-width: 500px) {
+
+            #toggleButton {
+                position: absolute;
+                top: -97px;
+                left: 40px;
+            }
+
+            .github {
+                position: absolute;
+                top: -105px;
+                left: 0px;
+            }
+            h1.title {
+                margin-top: 70px;
+                top: -60px;
+            }
+            /*.lang {
+                top: 75px;
+                position: relative;
+            }*/
+
         }
         /*.glowing-text {
           text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff0080, 0 0 70px #ff0080, 0 0 80px #ff0080, 0 0 50px #ff0080;
