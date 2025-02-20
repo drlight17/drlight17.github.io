@@ -241,7 +241,7 @@
                     fs_btn.style["top"] = "2px";
                 } else {
                     fs_btn.style["font-size"] = "21px";
-                    fs_btn.style["top"] = "-4px";
+                    fs_btn.style["top"] = "0px";
                 }
                 
                 fs_btn.style["left"] = "-30px";
