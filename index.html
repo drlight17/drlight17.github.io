@@ -71,12 +71,12 @@
             color: white;
         }
 
-        body.dark-theme #fullscreen_btn {
+        body.dark-theme #fullscreen_btn, body.dark-theme #hideDemo_btn {
             filter: invert(1);
         }
 
 
-        body.light-theme #fullscreen_btn {
+        body.light-theme #fullscreen_btn, body.light-theme #hideDemo_btn  {
             filter: invert(0);
         }
 
@@ -348,10 +348,11 @@
                 document.body.style["background-color"] = "black";
             }
             document.body.style["opacity"] = 0;
-            document.querySelector('canvas').webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
             
-            if (document.querySelector('canvas').mozRequestFullScreen) {
+            if (navigator.userAgent.toLowerCase().includes("firefox")) {
                 document.querySelector('canvas').mozRequestFullScreen(); //Firefox
+            } else {
+                document.querySelector('canvas').webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT); //Chrome
             }
 
 
@@ -390,7 +391,8 @@
             loadTranslations(initialLang);
         }
 
-        document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+        document.addEventListener('fullscreenchange', onFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', onFullscreenChange); 
 
     </script>
 
