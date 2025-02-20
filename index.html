@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="ленты, скринсейвер, windows, screensaver, electron, js, javascript, nodejs, ribbons">
+    <meta property="og:title" content='Ribbons Screensaver'>
+    <meta property="og:description" content='Famous Windows "Ribbons" inspired screensaver made with JavaScript and Electron, supporting multiple platforms.'>
+    <meta property="og:image" content="https://raw.githubusercontent.com/drlight17/ribbons-electron/master/icon.png">
+    <meta property="og:url" content="https://drlight17.github.io">
     <title>Ribbons Screensaver</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/drlight17/ribbons-electron/master/icon.png" />
     <style>
@@ -288,6 +292,8 @@
           document.getElementById('spec_li2').innerHTML = translations.spec_li2;
           document.getElementById('all_rights_p').textContent = translations.all_rights_p;
           document.getElementById('toggleButton').title = translations.toggleButton;
+          document.querySelector('meta[property="og:title"]').setAttribute("content", translations.icon_span);
+          document.querySelector('meta[property="og:description"]').setAttribute("content", translations.title);
           
         }
 
