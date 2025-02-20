@@ -218,13 +218,12 @@
                 fs_btn.id = 'fullscreen_btn';
                 hide_btn.textContent = '×';
                 hide_btn.title = 'Close';
-                fs_btn.textContent = '🖵';
-                fs_btn.style["font-size"] = "21px";
+                fs_btn.textContent = '⛶';
+                
                 hide_btn.style["font-size"] = "33px";
                 fs_btn.title = 'Fullscreen';
                 hide_btn.style["z-index"] = "9999";
                 hide_btn.style["display"] = "none";
-                hide_btn.style["filter"] = "invert(0.7)";
                 hide_btn.style["position"] = "relative";
                 hide_btn.style["top"] = "-7px";
                 hide_btn.style["left"] = "-10px";
@@ -237,7 +236,14 @@
                 fs_btn.style["z-index"] = "9999";
                 fs_btn.style["display"] = "none";
                 fs_btn.style["position"] = "relative";
-                fs_btn.style["top"] = "-4px";
+                if (navigator.userAgent.toLowerCase().includes("firefox")) {
+                    fs_btn.style["font-size"] = "19px";
+                    fs_btn.style["top"] = "2px";
+                } else {
+                    fs_btn.style["font-size"] = "21px";
+                    fs_btn.style["top"] = "-4px";
+                }
+                
                 fs_btn.style["left"] = "-30px";
                 fs_btn.style["float"] = "right";
                 fs_btn.style["background"] = "none";
