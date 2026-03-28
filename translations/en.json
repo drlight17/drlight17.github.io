@@ -6,7 +6,7 @@
 	"fullscreen_btn":"Fullscreen",
 	"hideDemo_btn":"Close",
 	"sys_req":"Minimum system requirements",
-	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux with modern kernel version (5.x) and Xserver (wayland is not supported)",
+	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux with modern kernel version (>=5.x)",
 	"download":"Download",
 	"platform_th":"Platform",
 	"type_th":"Type",

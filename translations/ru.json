@@ -6,7 +6,7 @@
 	"fullscreen_btn":"На весь экран",
 	"hideDemo_btn":"Закрыть",
 	"sys_req":"Минимальные системные требования",
-	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux с современной версией ядра (5.x) и Xserver (wayland не поддерживается)",
+	"sys_req_p":"MacOS 10.15 Catalina, Windows 8/2012, Linux с современной версией ядра (>=5.x)",
 	"download":"Загрузка",
 	"platform_th":"Платформа",
 	"type_th":"Тип",
